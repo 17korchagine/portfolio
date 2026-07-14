@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poster Templates · seventeen korchagine</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,700;14..32,900&family=Playfair+Display:ital,wght@0,600;1,700&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&family=Work+Sans:wght@200;600;900&display=swap" rel="stylesheet" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: whitesmoke;
+      min-height: 100vh;
+      padding-top: 80px;
+      color: #1a409f;
+    }
+
+    /* ----- FIXED TOP MENU ----- */
+    .top-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      z-index: 50;
+      font-size: 1.4rem;
+      letter-spacing: 0.005em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #1a409f;
+      background-color: whitesmoke;
+      border-bottom: 1px solid #1a409f;
+    }
+
+    .top-menu span {
+      cursor: pointer;
+      padding: 0.2rem 0.1rem;
+      transition: 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+
+    .top-menu span:hover {
+      border-bottom: 1px solid #1a409f;
+    }
+
+    /* ----- WORK CONTAINER (centered) ----- */
+    .work-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    /* ----- HEADER (centered, text left-aligned, narrower) ----- */
+    .work-header {
+      max-width: 650px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .work-title {
+      font-size: 2.5rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: #1a409f;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .work-meta {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #1a409f;
+      opacity: 0.6;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Description with "Learn More" on mobile */
+    .work-description-wrapper {
+      position: relative;
+      max-width: 100%;
+    }
+
+    .work-description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #1a409f;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .work-description p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Extra info (images, fonts) */
+    .work-extra-info {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #1a409f;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .work-extra-info p {
+      margin-bottom: 1.5rem;
+    }
+
+    /* Learn More content wrapper */
+    .learn-more-content {
+      max-height: none;
+      overflow: visible;
+      transition: max-height 0.4s ease;
+    }
+
+    .learn-more-content.collapsed {
+      max-height: 120px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .learn-more-content.collapsed::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background: linear-gradient(transparent, whitesmoke);
+    }
+
+    /* ----- SUBTLE LEARN MORE BUTTON ----- */
+    .learn-more-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #1a409f;
+      padding: 0.2rem 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: 0.2s;
+      opacity: 0.4;
+      border-bottom: 1px solid transparent;
+      margin-bottom: 1.5rem;
+    }
+
+    .learn-more-btn:hover {
+      opacity: 0.8;
+      border-bottom: 1px solid #1a409f;
+    }
+
+    /* ----- THIN BLUE LINE (1px) ----- */
+    .thin-line {
+      width: 100%;
+      border-top: 1px solid #1a409f;
+      margin: 1.5rem 0 2.5rem 0;
+      opacity: 1;
+    }
+
+    /* ----- IMAGE GRID (3 columns) ----- */
+    .work-image-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Center single image in grid */
+    .work-image-grid.single-image {
+      grid-template-columns: 1fr;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .work-image-grid .grid-item {
+      border: 1px solid #1a409f;
+      overflow: hidden;
+      background: whitesmoke;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .work-image-grid .grid-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ----- CUSTOM IMAGE SIZES (bigger full-height) ----- */
+    .grid-item.small img {
+      max-height: 250px;
+      object-fit: cover;
+    }
+
+    .grid-item.medium img {
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .grid-item.large img {
+      max-height: 550px;
+      object-fit: cover;
+    }
+
+    .grid-item.tall img {
+      max-height: 650px;
+      object-fit: cover;
+    }
+
+    /* Full height - shows the entire image, no cropping */
+    .grid-item.full-height img {
+      max-height: none;
+      height: auto;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    /* Full width - spans all 3 columns */
+    .grid-item.full-width {
+      grid-column: span 3;
+    }
+
+    .grid-item.full-width img {
+      max-height: 700px;
+      object-fit: cover;
+    }
+
+    /* Span 2 columns */
+    .grid-item.span-2 {
+      grid-column: span 2;
+    }
+
+    .grid-item.span-2 img {
+      max-height: 500px;
+      object-fit: cover;
+    }
+
+    /* ----- FILL FRAME (zoom + crop for photo.jpg) ----- */
+    .grid-item.fill-frame {
+      grid-column: span 2;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .grid-item.fill-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .grid-item.fill-frame.single {
+      grid-column: span 1;
+      max-width: 800px;
+      margin: 0 auto;
+      min-height: 400px;
+    }
+
+    .grid-item.fill-frame.single img {
+      min-height: 400px;
+    }
+
+    /* ----- SECTION TEXT BLOCK (centered, narrower) ----- */
+    .work-section-text {
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    .work-section-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #1a409f;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .work-section-text .section-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #1a409f;
+      opacity: 0.6;
+      margin-bottom: 0.5rem;
+      display: block;
+      font-weight: 400;
+    }
+
+    .work-section-text .section-line {
+      width: 100%;
+      border-top: 1px solid #1a409f;
+      margin: 1.5rem 0;
+      opacity: 1;
+    }
+
+    /* ----- INQUIRE BUTTON (prominent, centered) ----- */
+    .work-inquire-wrapper {
+      display: flex;
+      justify-content: center;
+      max-width: 650px;
+      margin: 2.5rem auto 3.5rem auto;
+    }
+
+.work-inquire {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  border: 1px solid #1a409f;
+  padding: 0.4rem 1.8rem;
+  background: transparent;
+  transition: 0.25s ease;
+  font-family: 'Inter', sans-serif;
+  color: #1a409f;
+  text-decoration: none;
+}
+
+.work-inquire:hover {
+  background: #1a409f;
+  color: whitesmoke;
+}
+
+    /* ----- FOOTER (centered, narrower) ----- */
+    .work-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 650px;
+      margin: 3rem auto 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid #1a409f;
+    }
+
+    .work-footer .back-link {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #1a409f;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: 0.2s;
+      cursor: pointer;
+      font-weight: 400;
+      opacity: 0.6;
+    }
+
+    .work-footer .back-link:hover {
+      border-bottom: 1px solid #1a409f;
+      opacity: 1;
+    }
+
+    .work-footer .date {
+      font-size: 0.9rem;
+      color: #1a409f;
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 768px) {
+      .top-menu {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .work-container {
+        padding: 1rem 1rem 3rem;
+      }
+
+      .work-title {
+        font-size: 2rem;
+      }
+
+      .work-description {
+        font-size: 1rem;
+      }
+
+      .work-extra-info {
+        font-size: 1rem;
+      }
+
+      .learn-more-btn {
+        display: inline-block;
+      }
+
+      .work-image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .work-image-grid.single-image {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+
+      .grid-item.full-width {
+        grid-column: span 2;
+      }
+
+      .grid-item.span-2 {
+        grid-column: span 2;
+      }
+
+      .grid-item.fill-frame {
+        grid-column: span 2;
+      }
+
+      .grid-item.fill-frame img {
+        min-height: 350px;
+      }
+
+      .grid-item.fill-frame.single img {
+        min-height: 300px;
+      }
+
+      .work-inquire-wrapper {
+        justify-content: center;
+      }
+
+      .work-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .grid-item.small img { max-height: 220px; }
+      .grid-item.medium img { max-height: 350px; }
+      .grid-item.large img { max-height: 450px; }
+      .grid-item.tall img { max-height: 500px; }
+      .grid-item.full-width img { max-height: 500px; }
+    }
+
+    @media (max-width: 480px) {
+      .top-menu {
+        font-size: 0.9rem;
+        padding: 0.8rem 1rem;
+        letter-spacing: 0.01em;
+      }
+
+      .work-title {
+        font-size: 1.5rem;
+      }
+
+      .work-meta {
+        font-size: 0.7rem;
+      }
+
+      .work-description {
+        font-size: 0.9rem;
+      }
+
+      .work-extra-info {
+        font-size: 0.9rem;
+      }
+
+      .work-section-text p {
+        font-size: 0.9rem;
+      }
+
+      .work-image-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .work-image-grid.single-image {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-item.full-width {
+        grid-column: span 1;
+      }
+
+      .grid-item.span-2 {
+        grid-column: span 1;
+      }
+
+      .grid-item.fill-frame {
+        grid-column: span 1;
+      }
+
+      .grid-item.fill-frame img {
+        min-height: 250px;
+      }
+
+      .grid-item.fill-frame.single img {
+        min-height: 250px;
+      }
+
+      .work-inquire {
+        font-size: 0.75rem;
+        padding: 0.3rem 1.2rem;
+      }
+
+      .work-footer .back-link {
+        font-size: 0.7rem;
+      }
+
+      .work-footer .date {
+        font-size: 0.7rem;
+      }
+
+      .grid-item.small img { max-height: 250px; }
+      .grid-item.medium img { max-height: 350px; }
+      .grid-item.large img { max-height: 450px; }
+      .grid-item.tall img { max-height: 500px; }
+      .grid-item.full-width img { max-height: 450px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="top-menu">
+    <span onclick="window.location.href='index.html'">WORKS</span>
+    <span onclick="window.location.href='about.html'">ABOUT</span>
+    <span onclick="window.location.href='contact.html'">CONTACT</span>
+  </nav>
+
+  <div class="work-container">
+    <!-- HEADER -->
+    <div class="work-header">
+      <h1 class="work-title">Event Poster Templates</h1>
+
+      <div class="work-meta">Illustrator · 2025</div>
+
+      <!-- LEARN MORE WRAPPER -->
+      <div class="learn-more-wrapper">
+        <div class="learn-more-content" id="learnMoreContent">
+          <div class="work-description">
+            <p>This is a modular concept for a music and film venue. The goal was to keep the template simple but elegant, and easy for the customer to use on their own.</p>
+          </div>
+
+          <div class="thin-line"></div>
+
+          <div class="work-extra-info">
+            <p>Images: Property of the Artists <br>Fonts: Helvetica</p>
+          </div>
+        </div>
+
+        <button class="learn-more-btn" id="learnMoreBtn" onclick="toggleDescription()">Learn More</button>
+      </div>
+    </div>
+
+    <!-- INQUIRE BUTTON -->
+    <div class="work-inquire-wrapper">
+     <a href="contact.html" class="work-inquire">[INQUIRE]</a>
+    </div>
+
+    <!-- IMAGE GRID ROW 1 (2 images: poster2 + photo1.jpg fill-frame) -->
+    <div class="work-image-grid single-image">
+      <div class="grid-item fill-frame">
+        <img src="event_posters/poster2.png" alt="Poster template 2" />
+      </div>
+      <div class="grid-item fill-frame">
+        <img src="event_posters/photo1.jpg" alt="Venue photo" />
+      </div>
+    </div>
+
+    <!-- SECTION TEXT BLOCK 1 -->
+    <div class="work-section-text">
+      <span class="section-label">— Process Breakdown —</span>
+      <p>The starting point for each poster is a photo related to the film or musician playing at the venue.</p>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- IMAGE GRID ROW 2 (1 image: poster1, centered) -->
+    <div class="work-image-grid single-image">
+      <div class="grid-item full-height">
+        <img src="event_posters/poster1.png" alt="Poster template 1" />
+      </div>
+    </div>
+
+    <!-- SECTION TEXT BLOCK 2 -->
+    <div class="work-section-text">
+      <span class="section-label">— Application —</span>
+      <p>Each poster uses dreamy, distorted graphical elements. These shapes, created in Illustrator, use the photo at the core of the posters as a reference. Faces can be obscured, making the posters feel dreamy and mysterious.</p>
+      <div class="section-line"></div>
+    </div>
+
+    <!-- IMAGE GRID ROW 3 (1 image: poster3, centered) -->
+    <div class="work-image-grid single-image">
+      <div class="grid-item full-height">
+        <img src="event_posters/poster3.png" alt="Poster template 3" />
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="work-footer">
+      <span class="back-link" onclick="window.location.href='index.html'">← Back to Works</span>
+      <span class="date">2025</span>
+    </div>
+  </div>
+
+  <script>
+    function toggleDescription() {
+      const content = document.getElementById('learnMoreContent');
+      const btn = document.getElementById('learnMoreBtn');
+      
+      if (content.classList.contains('collapsed')) {
+        content.classList.remove('collapsed');
+        btn.textContent = 'Show Less';
+      } else {
+        content.classList.add('collapsed');
+        btn.textContent = 'Learn More';
+      }
+    }
+
+    function initDescription() {
+      const content = document.getElementById('learnMoreContent');
+      const btn = document.getElementById('learnMoreBtn');
+      
+      if (window.innerWidth <= 768) {
+        content.classList.add('collapsed');
+        btn.style.display = 'inline-block';
+      } else {
+        content.classList.remove('collapsed');
+        btn.style.display = 'none';
+      }
+    }
+
+    window.addEventListener('load', initDescription);
+    window.addEventListener('resize', initDescription);
+  </script>
+
+</body>
+</html>
