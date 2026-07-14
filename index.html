@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>seventeen korchagine · portfolio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,700;14..32,900&family=Playfair+Display:ital,wght@0,600;1,700&family=Space+Grotesk:wght@300;500;700&family=Syne:wght@400;700;800&family=Work+Sans:wght@200;600;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="index-style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- TOP MENU -->
+    <nav class="top-menu" id="topMenu">
+      <span data-section="works">WORKS</span>
+      <span data-section="about">ABOUT</span>
+      <span data-section="contact">CONTACT</span>
+    </nav>
+
+    <!-- LANDING -->
+    <section class="landing" id="landing">
+      <div class="rotating-title" id="rotatingTitle"></div>
+      <div class="sub-hint">· press any key or click ·</div>
+    </section>
+
+    <!-- WORKS (mosaic) -->
+<!-- WORKS (full-width with filter) -->
+<section class="works-section" id="worksSection">
+  <!-- FILTER MENU -->
+  <div class="filter-menu" id="filterMenu">
+    <span class="filter-item active" data-filter="all">All</span>
+    <span class="filter-item" data-filter="concept">Concept</span>
+    <span class="filter-item" data-filter="print">Print</span>
+    <span class="filter-item" data-filter="web">Web</span>
+    <span class="filter-item" data-filter="video">Video</span>
+    <span class="filter-item" data-filter="art">Art</span>
+  </div>
+
+  <!-- FILTER MENU -->
+  
+  <!-- WORK ITEMS -->
+  <div id="workContainer">
+    <!-- Work items will be rendered here by JavaScript -->
+  </div>
+</section>
+
+  </div>
+
+  <script src="index-script.js"></script>
+</body>
+</html>

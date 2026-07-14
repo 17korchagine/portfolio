@@ -1,0 +1,644 @@
+/* ----- RESET & BASE ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+/* semi‑transparent overlay */
+.app {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* ----- FIXED TOP MENU ----- */
+.top-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 50;
+  font-size: 1.4rem;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #1a409f;
+  background-color: whitesmoke;
+  background-attachment: fixed;
+  border-bottom: 1px solid #1a409f;
+}
+
+.top-menu span {
+  cursor: pointer;
+  padding: 0.2rem 0.1rem;
+  transition: 0.2s;
+  border-bottom: 1px solid transparent;
+}
+
+.top-menu span:hover {
+  border-bottom: 1px solid #1a409f;
+}
+
+/* ----- LANDING ----- */
+.landing {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  background-color: whitesmoke;
+  flex-shrink: 0;
+  /*background-image: url("bg.png");
+  background-size: cover;
+  mix-blend-mode: multiply;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;*/
+  min-height: 100vh;
+  padding: 0 2rem;
+}
+
+.rotating-title {
+  width: 100%;
+  max-width: 1100px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.rotating-title img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  position: absolute;
+  mix-blend-mode: multiply;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.sub-hint {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  opacity: 0.5;
+  text-transform: uppercase;
+  font-weight: 300;
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c6f98;
+}
+
+/* ----- WORKS SECTION ----- */
+.works-section {
+  width: 100%;
+  max-width: 100vw;
+  display: block;
+  overflow: hidden;
+    /*background-image: url("bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  mix-blend-mode: multiply;*/
+  flex: 1;
+  z-index: 5;
+  padding: 2rem 1rem;
+}
+
+/* ----- FILTER MENU (anchored at top, appears after scrolling) ----- */
+/* ----- FILTER MENU (always visible) ----- */
+/* ----- FILTER MENU (always visible) ----- */
+.filter-menu {
+  position: fixed;
+  top: 80px; /* Below main menu on desktop */
+  left: 0;
+  width: 100%;
+  padding: 0.8rem 3rem;
+  background: whitesmoke;
+  border-bottom: 1px solid #1a409f;
+  z-index: 49;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+.filter-menu .filter-item {
+  font-size: 1rem;
+  text-transform: none;
+  letter-spacing: 0.05em;
+  color: #1a409f;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid transparent;
+  transition: 0.2s;
+  font-weight: 500;
+}
+
+.filter-menu .filter-item:hover {
+  border-bottom: 1px solid #1a409f;
+}
+
+.filter-menu .filter-item.active {
+  border-bottom: 1px solid #1a409f;
+}
+/* ----- WORK TITLE (top-left corner, appears on hover) ----- */
+/* ----- WORK TITLE (top-left corner, appears on hover) ----- */
+
+/* ----- FULL-WIDTH WORK ITEM ----- */
+.work-item {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 30px auto;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #1a409f;
+  background: #f5f5f5;
+  display: none; /* hidden by default, shown by filter */
+}
+
+.work-item .work-title-overlay {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  color: #1a409f;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  background: rgba(245, 245, 245, 0.85);
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #1a409f;
+}
+
+/* ----- WORK DATE (bottom-right corner, appears on hover) ----- */
+.work-item .work-date-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  color: #1a409f;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  background: rgba(245, 245, 245, 0.85);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #1a409f;
+}
+
+.work-item.visible {
+  display: block;
+}
+
+.work-item .work-image {
+  width: 100%;
+  display: block;
+}
+
+.work-item .work-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ----- WORK TITLE (top-left corner, appears on hover) ----- */
+
+.work-item:hover .work-title-overlay,
+.work-item:hover .work-date-overlay {
+  opacity: 1;
+}
+
+
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  grid-auto-flow: dense;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 20px;
+  height: auto;
+}
+
+/* ----- TILE WRAPPER (image + title below) ----- */
+.tile-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+/* individual tile - IMAGE ONLY */
+.tile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1a409f;
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  background: transparent;
+  color: #1a409f;
+  border-radius: 0px;
+}
+
+/* Image inside tile */
+.tile .tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.4s ease;
+}
+
+/* Second image (hover) - hidden by default */
+.tile .tile-image-hover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.tile:hover .tile-image {
+  opacity: 0;
+}
+
+.tile:hover .tile-image-hover {
+  opacity: 1;
+}
+
+/* ----- TILE SIZES - VARIABLE WIDTH, SAME HEIGHT ----- */
+/* Small (1 column) */
+.tile-wrapper.small {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.tile-wrapper.small .tile {
+  min-height: 400px;
+}
+
+/* Medium (2 columns) */
+.tile-wrapper.medium {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.tile-wrapper.medium .tile {
+  min-height: 400px;
+}
+
+/* Large (3 columns) */
+.tile-wrapper.large {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.tile-wrapper.large .tile {
+  min-height: 400px;
+}
+
+/* Full width (4 columns) */
+.tile-wrapper.full {
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+.tile-wrapper.full .tile {
+  min-height: 400px;
+}
+
+/* ----- TILE FORMATS (aspect ratio control) ----- */
+.tile.format-square .tile-image,
+.tile.format-square .tile-image-hover {
+  object-fit: cover;
+}
+
+.tile.format-tall .tile-image,
+.tile.format-tall .tile-image-hover {
+  object-fit: cover;
+}
+
+.tile.format-wide .tile-image,
+.tile.format-wide .tile-image-hover {
+  object-fit: cover;
+}
+
+/* ----- TITLE CARD (below the image) ----- */
+.tile-title-card {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: whitesmoke;
+  border-left: 1px solid #1a409f;
+  border-right: 1px solid #1a409f;
+  border-bottom: 1px solid #1a409f;
+  box-sizing: border-box;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tile-title-card .info-title {
+  font-size: 1rem;
+  font-weight: 600;
+    text-transform: uppercase;
+  color: #1a409f;
+  margin-bottom: 0.1rem;
+  letter-spacing: 0.02em;
+}
+
+.tile-title-card .info-category {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1a409f;
+  opacity: 0.6;
+}
+
+.tile-title-card .info-desc {
+  font-size: 0.75rem;
+  color: #1a409f;
+  opacity: 0.7;
+  margin-top: 0.1rem;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1024px) {
+  .works-section {
+    padding: 1.5rem 0.75rem;
+  }
+  .mosaic-grid {
+    gap: 25px;
+  }
+  .tile-wrapper.small .tile { min-height: 320px; }
+  .tile-wrapper.medium .tile { min-height: 320px; }
+  .tile-wrapper.large .tile { min-height: 320px; }
+  .tile-wrapper.full .tile { min-height: 320px; }
+  .tile-title-card .info-title {
+    font-size: 0.9rem;
+  }
+  .tile-title-card .info-desc {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-menu {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  .works-section {
+    padding: 1rem 0.5rem;
+  }
+  .mosaic-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .tile-wrapper.small .tile { min-height: 280px; }
+  .tile-wrapper.medium .tile { min-height: 280px; }
+  .tile-wrapper.large .tile { min-height: 280px; }
+  .tile-wrapper.full .tile { min-height: 280px; }
+  .tile-title-card {
+    padding: 0.6rem 0.8rem;
+    min-height: 70px;
+  }
+  .tile-title-card .info-title {
+    font-size: 0.8rem;
+  }
+  .tile-title-card .info-desc {
+    font-size: 0.65rem;
+  }
+  .tile-title-card .info-category {
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-menu {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+    letter-spacing: 0.01em;
+  }
+  
+  /* Mobile: 1 tile per row */
+  .mosaic-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    max-width: 100%;
+  }
+  
+  .tile-wrapper.small { grid-column: span 1; }
+  .tile-wrapper.medium { grid-column: span 1; }
+  .tile-wrapper.large { grid-column: span 1; }
+  .tile-wrapper.full { grid-column: span 1; }
+  
+  .tile-wrapper.small .tile { min-height: 350px; }
+  .tile-wrapper.medium .tile { min-height: 350px; }
+  .tile-wrapper.large .tile { min-height: 350px; }
+  .tile-wrapper.full .tile { min-height: 350px; }
+  
+  .tile-title-card {
+    padding: 0.5rem 0.8rem;
+    min-height: 70px;
+  }
+  .tile-title-card .info-title {
+    font-size: 0.9rem;
+  }
+  .tile-title-card .info-desc {
+    font-size: 0.7rem;
+  }
+  .tile-title-card .info-category {
+    font-size: 0.6rem;
+  }
+}
+
+/* ----- MOBILE SPECIFIC STYLES ----- */
+@media (max-width: 480px) {
+  /* Hide "press any key" text on mobile */
+  .sub-hint {
+    display: none !important;
+  }
+  
+  /* Filter menu - smaller on mobile, appears on scroll */
+.top-menu {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+    letter-spacing: 0.01em;
+  }
+  
+  .filter-menu {
+    top: 100%; /* Anchors to bottom of top menu */
+    padding: 0.4rem 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .filter-menu .filter-item {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+   .top-menu {
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+    letter-spacing: 0.01em;
+    height: 55px; /* Fixed height so filter menu can align below */
+  }
+  
+  /* Filter menu - directly below top menu on mobile */
+  .filter-menu {
+    position: fixed;
+    top: 55px; /* Matches top menu height */
+    left: 0;
+    width: 100%;
+    padding: 0.4rem 0.8rem;
+    gap: 0.6rem;
+    justify-content: center;
+    background: whitesmoke;
+    border-bottom: 1px solid #1a409f;
+    z-index: 49;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  
+  .filter-menu .filter-item {
+    font-size: 0.55rem;
+    letter-spacing: 0.04em;
+    padding: 0.1rem 0.2rem;
+    font-weight: 500;
+    color: #1a409f;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: 0.2s;
+  }
+  
+  .filter-menu .filter-item.active {
+    border-bottom: 1px solid #1a409f;
+  }
+  
+  /* Work items - full width on mobile */
+  .work-item {
+    margin-bottom: 16px;
+    border: 1px solid #1a409f;
+    background: whitesmoke;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .work-item .work-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #1a409f;
+  }
+  
+  .work-item .work-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Title and date always visible below work (smaller) */
+  .work-item .work-title-overlay {
+    position: relative;
+    top: auto;
+    left: auto;
+    opacity: 1;
+    background: whitesmoke;
+    border: none;
+    padding: 0.3rem 0.8rem 0.1rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    color: #1a409f;
+    pointer-events: none;
+  }
+  
+  .work-item .work-date-overlay {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    opacity: 1;
+    background: whitesmoke;
+    border: none;
+    padding: 0 0.8rem 0.4rem 0.8rem;
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: #1a409f;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  
+  /* Remove hover effect on mobile */
+  .work-item:hover .work-title-overlay,
+  .work-item:hover .work-date-overlay {
+    opacity: 1;
+  }
+}
