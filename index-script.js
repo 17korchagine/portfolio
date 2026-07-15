@@ -46,7 +46,8 @@
       title: 'Podcast Identity',
       date: '2026',
       category: 'concept',
-      image: 'podcast_id_1/template-website.jpg',
+      image: 'podcast_id_1/template-website-1.jpg',
+      mobileImage: 'podcast_id_1/template-website-mobile.jpg',
       hoverImage: 'podcast_id_2/img2.png',
       link: 'podcast.html'
     },
@@ -55,6 +56,7 @@
       date: '2025',
       category: 'concept',
       image: 'light_fabrics/template-website.jpg',
+      mobileImage: 'light_fabrics/template-website-mobile.jpg',
       hoverImage: 'light_fabrics/template-website.jpg',
       link: 'light_fabrics.html'
     },
@@ -62,7 +64,8 @@
       title: 'E-Traxx Düsseldorf',
       date: '2026',
       category: 'print',
-      image: 'image2.png',
+      image: 'etraxx/template-website.jpg',
+      mobileImage: 'etraxx/template-website-mobile-1.jpg',
       hoverImage: 'image3.png',
       link: 'etraxx.html'
     },
@@ -71,6 +74,7 @@
       date: '2026',
       category: 'concept',
       image: 'event_posters/template-website.jpg',
+      mobileImage: 'event_posters/template-website-mobile.jpg',
       hoverImage: 'lag/img2.png',
       link: 'posters.html'
     },
@@ -79,6 +83,7 @@
       date: '2025',
       category: 'print',
       image: 'privacy_book/template-website.jpg',
+      mobileImage: 'privacy_book/template-website-mobile.jpg',
       hoverImage: 'privacy_book/zine_full8.jpg',
       link: 'privacy_book.html'
     },
@@ -87,14 +92,16 @@
       date: '2026',
       category: 'print',
       image: 'wwib_book/template-website.jpg',
+      mobileImage: 'wwib_book/template-website-mobile.jpg',
       hoverImage: 'wwib_book/book-15.png',
-      link: 'wwib.html'
+      link: 'wwib_book.html'
     },
     { 
       title: 'Last Moments Aggregate',
       date: '2025',
       category: 'web',
       image: 'lag/template-website.jpg',
+      mobileImage: 'lag/template-website-mobile.jpg',
       hoverImage: 'lag/lu4.jpg',
       link: 'aggregate.html'
     },
@@ -103,6 +110,7 @@
       date: '2025',
       category: 'web',
       image: 'ghost/template-website.jpg',
+      mobileImage: 'ghost/template-website-mobile.jpg',
       hoverImage: 'image3.png',
       link: 'ghost.html'
     },
@@ -111,6 +119,7 @@
       date: '2026',
       category: 'art',
       image: 'illustration2/template-website.jpg',
+      mobileImage: 'illustration2/template-website-mobile.jpg',
       hoverImage: 'image3.png',
       link: 'illustration_goons.html'
     },
@@ -119,6 +128,7 @@
       date: '2024',
       category: 'concept',
       image: 'image2.png',
+      mobileImage: 'image2-mobile.png',
       hoverImage: 'image3.png',
       link: 'work-print-pulse.html'
     },
@@ -127,6 +137,7 @@
       date: '2026',
       category: 'video',
       image: 'elliott_smith/template-website.jpg',
+      mobileImage: 'elliott_smith/template-website-mobile.jpg',
       hoverImage: 'image3.png',
       link: 'work-print-pulse.html'
     },
@@ -135,6 +146,7 @@
       date: '2026',
       category: 'video',
       image: 'image2.png',
+      mobileImage: 'image2-mobile.png',
       hoverImage: 'image3.png',
       link: 'work-print-pulse.html'
     },
@@ -143,6 +155,7 @@
       date: '2024',
       category: 'video',
       image: 'image2.png',
+      mobileImage: 'image2-mobile.png',
       hoverImage: 'image3.png',
       link: 'work-print-pulse.html'
     },
@@ -151,6 +164,7 @@
       date: '2024',
       category: 'video',
       image: 'salem_weep/template-website.jpg',
+      mobileImage: 'salem_weep/template-website-mobile.jpg',
       hoverImage: 'image3.png',
       link: 'work-print-pulse.html'
     },
@@ -169,24 +183,41 @@
       ? projects 
       : projects.filter(p => p.category === filter);
     
+    // Check if mobile
     const isMobile = window.innerWidth <= 480;
     
     filteredProjects.forEach((p, idx) => {
       const wrapper = document.createElement('div');
       wrapper.className = 'work-item visible';
 
+      // ----- IMAGE (different for mobile) -----
       const img = document.createElement('img');
       img.className = 'work-image';
-      img.src = p.image || 'placeholder.jpg';
+      
+      // Use mobile image if on mobile and it exists, otherwise fallback to desktop image
+      let imageSrc;
+      if (isMobile && p.mobileImage) {
+        imageSrc = p.mobileImage;
+      } else {
+        imageSrc = p.image || 'placeholder.jpg';
+      }
+      
+      img.src = imageSrc;
       img.alt = p.title;
       img.onerror = function() {
-        this.style.display = 'none';
-        wrapper.style.backgroundColor = '#e8e0d8';
-        wrapper.style.minHeight = '200px';
+        // If mobile image fails, fallback to desktop image
+        if (isMobile && p.mobileImage) {
+          this.src = p.image || 'placeholder.jpg';
+        } else {
+          this.style.display = 'none';
+          wrapper.style.backgroundColor = '#e8e0d8';
+          wrapper.style.minHeight = '200px';
+        }
       };
       wrapper.appendChild(img);
 
       if (isMobile) {
+        // Mobile: Title and date always visible below image
         const titleDiv = document.createElement('div');
         titleDiv.className = 'work-title-overlay';
         titleDiv.textContent = p.title;
@@ -197,6 +228,7 @@
         dateDiv.textContent = p.date;
         wrapper.appendChild(dateDiv);
       } else {
+        // Desktop: Title and date appear on hover
         const titleOverlay = document.createElement('div');
         titleOverlay.className = 'work-title-overlay';
         titleOverlay.textContent = p.title;
@@ -208,6 +240,7 @@
         wrapper.appendChild(dateOverlay);
       }
 
+      // ----- CLICK -----
       wrapper.addEventListener('click', function(e) {
         if (p.link) {
           window.location.href = p.link;
@@ -220,7 +253,7 @@
     });
   }
 
-  // ----- RE-RENDER ON RESIZE -----
+  // ----- RE-RENDER ON RESIZE (for mobile/desktop switch) -----
   let resizeTimeout;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimeout);
@@ -290,6 +323,5 @@
     });
   });
 
-  console.log('📸 Full-width layout with filter menu (always visible)');
-  console.log('   Categories: concept, print, web, video, art');
+  console.log('📸 Desktop: template-website.jpg | Mobile: template-website-mobile.jpg');
 })();
