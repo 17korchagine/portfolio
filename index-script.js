@@ -73,58 +73,6 @@
       link: 'wwib_book.html'
     },
 
-            { 
-      title: 'Too Good Too Go',
-      date: '2024',
-      category: 'concept',
-      image: 'tgt/template-website-1.jpg',
-      mobileImage: 'tgt/template-website-mobile.jpg',
-      hoverImage: 'tgt/template-website-mobile.jpg',
-      link: 'tgtg.html'
-    },
-
-            { 
-      title: 'Podcast Identity',
-      date: '2026',
-      category: 'concept',
-      image: 'podcast_id_1/template-website-1.jpg',
-      mobileImage: 'podcast_id_1/template-website-mobile.jpg',
-      hoverImage: 'podcast_id_2/img2.png',
-      link: 'podcast.html'
-    },
-
-    
-        { 
-      title: 'Film Posters',
-      date: '2026',
-      category: 'concept',
-      image: 'film_posters/template-website.jpg',
-      mobileImage: 'film_posters/template-website-mobile.jpg',
-      hoverImage: 'lag/img2.png',
-      link: 'film_posters.html'
-    },
-
-        { 
-      title: 'Music Venue Posters',
-      date: '2026',
-      category: 'concept',
-      image: 'event_posters/template-website.jpg',
-      mobileImage: 'event_posters/template-website-mobile.jpg',
-      hoverImage: 'lag/img2.png',
-      link: 'posters.html'
-    },
-    
-
-            { 
-      title: 'E-Traxx Düsseldorf',
-      date: '2026',
-      category: 'print',
-      image: 'etraxx/template-website.jpg',
-      mobileImage: 'etraxx/template-website-mobile-1.jpg',
-      hoverImage: 'image3.png',
-      link: 'etraxx.html'
-    },
-
         { 
       title: 'Light Fabrics',
       date: '2025',
