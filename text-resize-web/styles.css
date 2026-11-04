@@ -1,0 +1,99 @@
+:root {
+  --bg: #f3f1ec;
+  --ink: #111;
+  --accent: #ff4a1c;
+  --pad: clamp(10px, 1.4vw, 24px);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink); }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/* The text space: exactly the screen */
+#stage {
+  position: fixed; inset: 0; padding: var(--pad);
+  overflow: hidden; cursor: default;
+}
+#flow, #measure, #probe {
+  font-size: 0; line-height: 0;           /* no strut: only spans take space */
+  font-weight: 600; letter-spacing: -0.025em; word-spacing: -0.025em;
+  overflow-wrap: anywhere; hyphens: auto;
+  text-align: justify;
+  display: flow-root;                     /* floated images count toward the height */
+}
+/* The text lives in three blocks: columns on top, the big type in the middle, columns
+   below. With columns switched off everything sits in the middle one. */
+.band { display: flow-root; }
+.band.last-justify { text-align-last: justify; }
+.band.cols { text-align-last: auto; letter-spacing: -0.03em; word-spacing: -0.045em; }
+/* a picture inside a column: one column wide, like a newspaper photo */
+.band.cols .s.img, .band.cols .s.img.right {
+  float: left; display: block; width: fit-content; margin: var(--m, 6px) var(--m, 6px) var(--m, 6px) 0; break-inside: avoid;
+}
+#measure, #probe {
+  position: absolute; left: 0; top: 0; visibility: hidden; pointer-events: none;
+}
+.s { cursor: pointer; }
+#flow .s {
+  transition: font-size .75s cubic-bezier(.2,.75,.15,1), line-height .75s cubic-bezier(.2,.75,.15,1), color .75s ease;
+}
+#flow.instant .s { transition: none; }
+#flow .s:hover { color: var(--accent) !important; }
+
+/* Images: standard sizes in golden-ratio steps (see imageWidth), never wider than a
+   third of the screen. They float, so text always runs beside them: no empty space
+   next to a picture. They alternate left and right through the text. */
+.s.img { float: left; font-size: 0; line-height: 0; margin: 0 var(--m, 8px) var(--m, 8px) 0; }
+.s.img.right { float: right; margin: 0 0 var(--m, 8px) var(--m, 8px); }
+.s.img img { display: block; }
+#flow .s.img { transition: opacity .75s ease, margin .75s cubic-bezier(.2,.75,.15,1); }
+#flow .s.img img { transition: width .75s cubic-bezier(.2,.75,.15,1), height .75s cubic-bezier(.2,.75,.15,1); }
+#flow.instant .s.img, #flow.instant .s.img img { transition: none; }
+#flow .s.img:hover img { outline: 3px solid var(--accent); outline-offset: -3px; }
+#flow .s.focus { color: var(--ink); }
+
+/* Editor */
+#editor {
+  position: fixed; inset: 0; display: flex; justify-content: center; align-items: flex-start;
+  overflow-y: auto; overscroll-behavior: contain;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px); z-index: 10; padding: 16px;
+}
+#editor[hidden] { display: none; }
+.panel {
+  width: min(760px, 100%); display: grid; gap: 14px; margin: auto 0;
+}
+.panel h1 { margin: 0; font-size: clamp(28px, 4vw, 48px); letter-spacing: -0.03em; line-height: 1; }
+.panel p { margin: 0; color: #555; font-size: 15px; line-height: 1.4; }
+textarea {
+  width: 100%; height: min(48vh, 420px); resize: vertical;
+  font: 15px/1.5 inherit; font-family: inherit; padding: 14px 16px;
+  border: 1.5px solid #111; border-radius: 10px; background: #fff; color: #111;
+}
+textarea:focus { outline: 3px solid color-mix(in srgb, var(--accent) 40%, transparent); }
+.row { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+#count { font-size: 14px; color: #555; font-variant-numeric: tabular-nums; }
+#count.over { color: var(--accent); font-weight: 600; }
+button {
+  font: 600 15px/1 inherit; font-family: inherit; padding: 13px 22px; border-radius: 999px;
+  border: 1.5px solid #111; background: #111; color: #fff; cursor: pointer;
+}
+button.ghost, .button-like { background: transparent; color: #111; }
+.button-like { font-weight: 600; border: 1.5px solid #111; border-radius: 999px; cursor: pointer; }
+
+.tools { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.upload { position: relative; overflow: hidden; display: inline-flex; padding: 11px 18px; font-size: 14px; }
+.upload input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.tools .hint { font-size: 13px; color: #777; }
+#thumbs { display: flex; gap: 10px; flex-wrap: wrap; }
+#thumbs:empty { display: none; }
+.thumb { position: relative; display: grid; gap: 4px; justify-items: start; font-size: 12px; color: #555; }
+.thumb img { height: 64px; width: auto; max-width: 140px; object-fit: cover; border-radius: 6px; border: 1px solid #ccc; display: block; }
+.thumb button { position: absolute; top: -7px; right: -7px; width: 22px; height: 22px; padding: 0; font-size: 13px; line-height: 1; }
+#editor.drag .panel { outline: 3px dashed var(--accent); outline-offset: 10px; border-radius: 12px; }
+
+#bar { position: fixed; right: 14px; bottom: 14px; z-index: 5; display: flex; gap: 8px; opacity: .6; transition: opacity .3s; }
+#bar button { padding: 9px 14px; font-size: 13px; }
+body.show-ui #bar, #bar:hover { opacity: 1; }
+#bar button { background: var(--bg); }
+.check { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #555; cursor: pointer; }
+.check input { width: 16px; height: 16px; accent-color: #111; }

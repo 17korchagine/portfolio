@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text Resize</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="stage"><div id="flow"></div></div>
+  <div id="measure"></div>
+  <div id="probe"></div>
+
+  <div id="bar">
+    <button id="colBtn" class="ghost" title="Newspaper columns for the small text (C)">Columns: on</button>
+    <button id="editBtn" class="ghost" title="Edit text (Esc)">Edit text</button>
+  </div>
+
+  <div id="editor">
+    <div class="panel">
+      <h1>Paste any text. Add images.</h1>
+      <p>Up to 10,000 words. All of it fits on one screen with no scrolling. Click any sentence or image to make it the big one. Use ← → to step through, and Esc to come back here.</p>
+      <textarea id="input" spellcheck="false"></textarea>
+      <div class="tools">
+        <label class="upload ghost button-like"><span>+ Add images</span><input id="files" type="file" accept="image/*" multiple></label>
+        <span class="hint">Or drop or paste images. Each one appears as [image N] at the cursor; move that tag to place it anywhere in the text.</span>
+      </div>
+      <div id="thumbs"></div>
+      <div class="row">
+        <label class="check"><input type="checkbox" id="colCheck"> Newspaper columns for the small text</label>
+      </div>
+      <div class="row">
+        <span id="count"></span>
+        <div style="display:flex;gap:10px">
+          <button id="cancelBtn" class="ghost" hidden>Cancel</button>
+          <button id="goBtn">Fit to screen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
