@@ -43,15 +43,6 @@
   // ----- PROJECT DATA -----
   let projects = [
     { 
-      title: 'Podcast Identity',
-      date: '2026',
-      category: 'concept',
-      image: 'podcast_id_1/template-website-1.jpg',
-      mobileImage: 'podcast_id_1/template-website-mobile.jpg',
-      hoverImage: 'podcast_id_2/img2.png',
-      link: 'podcast.html'
-    },
-    { 
       title: 'Light Fabrics',
       date: '2025',
       category: 'concept',
@@ -59,24 +50,6 @@
       mobileImage: 'light_fabrics/template-website-mobile.jpg',
       hoverImage: 'light_fabrics/template-website.jpg',
       link: 'light_fabrics.html'
-    },
-    { 
-      title: 'E-Traxx Düsseldorf',
-      date: '2026',
-      category: 'print',
-      image: 'etraxx/template-website.jpg',
-      mobileImage: 'etraxx/template-website-mobile-1.jpg',
-      hoverImage: 'image3.png',
-      link: 'etraxx.html'
-    },
-    { 
-      title: 'Music Venue Posters',
-      date: '2026',
-      category: 'concept',
-      image: 'event_posters/template-website.jpg',
-      mobileImage: 'event_posters/template-website-mobile.jpg',
-      hoverImage: 'lag/img2.png',
-      link: 'posters.html'
     },
     { 
       title: 'A Question Of Privacy',
